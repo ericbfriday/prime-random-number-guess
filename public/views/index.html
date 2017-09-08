@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vendors/jquery.min.js"></script>
+    <script src="../scripts/client.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="styles/style.css" /> -->
+</head>
+<body>
+    <h1>Guess What Number I'm Thinking!</h1>
+    <section id="setupMode">
+        <form>
+            <input type="radio" name="level" value="easy" id="easyMode">Easy (max 10)
+            <input type="radio" name="level" value="medium" id="mediumMode">Medium (max 50)
+            <input type="radio" name="level" value="hard" id="hardMode">Hard (max 100)  
+        </form>
+        <button id="submitSetup">PLAY!</button>
+    </section>
+    <section id="gameMode">
+            <p id="player1Guess">Player 1
+                <input type="number" placeholder="Enter Your Guess" id="guess1"/>
+            </p>
+            <p id="player2Guess">Player 2
+                <input type="number" placeholder="Enter Your Guess" id="guess2"/>
+            </p>
+            <p id="player3Guess">Player 3
+                <input type="number" placeholder="Enter Your Guess" id="guess3"/>
+            </p>            
+            <p id="player4Guess">Player 4
+                <input type="number" placeholder="Enter Your Guess" id="guess4"/>
+            </p>
+            <button id="submitGuesses">Submit Guesses!</button>
+    </section>
+</body>
+</html>
