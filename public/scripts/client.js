@@ -31,14 +31,23 @@ function submitSetup() {
         console.log("wtf!?");
         maxNumber = 0;
     };
-    cpuNum = generator(maxNumber);
-    return cpuNum;
-}
+    //cpuNum = generator(maxNumber);
+    return getRandom();
+};
 
-function generator(anyNumber) {
-    var randomNumber = Math.floor(Math.random() * anyNumber)+1;
-    return randomNumber;
-}
+function getRandom() {
+    console.log(maxNumber);
+    var objectToSend = {max: maxNumber};
+    console.log('getting random number');
+    $.ajax({
+        type: 'POST',
+        url: '/random',
+        data: objectToSend,
+        success: function(serverResp) {
+            console.log('SUCCESS!', serverResp);
+        }
+    }
+    )};
 
 //var cpuNum = generator(maxNumber);
 
@@ -52,7 +61,7 @@ function checkGuess(playerGuess, cpuGuess) {
     } else {
         console.log('You broke the game >:C');
     }
-}
+};
 
 var guessCount = 0;
 
@@ -67,6 +76,10 @@ function roundCheck() {
     checkGuess(player4, cpuNum);
     guessCount += 1;
     $('#guessCount').text(guessCount);
+    $('#guess1').val('');
+    $('#guess2').val('');
+    $('#guess3').val('');
+    $('#guess4').val('');
 };
 
 function abandonGame() {
@@ -78,4 +91,4 @@ function abandonGame() {
     $('#maxNumber').text(0);
     $('#gameMode').hide();
     $('#setupMode').show();
-}
+};
