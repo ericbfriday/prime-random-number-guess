@@ -5,6 +5,8 @@ var app = express();
 var port = 5000;
 var numberGenerator = require('./modules/randomNumber');
 var randomNumber = 0;
+var items = [];
+var guessesToSend = [];
 
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -25,21 +27,30 @@ app.post('/random', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-    var item = req.body.items;
+    items = req.body.items;
     console.log('In the BAse');
-    console.log(item);
+    console.log(items);
     res.sendStatus(200);
+    loopArray();
 });
+
+function loopArray() {
+    for (var i=0; i<items.length; i++) {
+        //checkGuess(items[i], randomNumber);
+        guessesToSend.push(checkGuess(items[i], randomNumber));
+    }
+    console.log(guessesToSend);
+}
 
 function checkGuess(playerGuess, cpuGuess) {
     if (playerGuess > cpuGuess) {
-        console.log('Too high!');
+        return (playerGuess + ' Too high!');
     } else if (playerGuess < cpuGuess) {
-        console.log('Too low!');
+        return (playerGuess + ' Too low!');
     } else if (playerGuess == cpuGuess) {
-        console.log('YOU WIN!!');
+        return (playerGuess + ' YOU WIN!!');
     } else {
-        console.log('You broke the game >:C');
+        return (playerGuess + ' You broke the game >:C');
     }
 };
 
