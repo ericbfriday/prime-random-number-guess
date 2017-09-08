@@ -93,17 +93,18 @@ function makeArray() {
             resultsArray.push(serverResp);
         }
     });
+    arrayUnwinder(resultsArray);
 };
 
 function arrayUnwinder(array) {
     // for (var i = 0; i < array.length; i++) {
     //     $('#guessResponse1').append(array[i]);
     //     console.log($('#guessResponse' + (i + 1)));
-    $('#guessResponse1').text(array[0][0]);
-    console.log(array[0]);
-    $('#guessResponse2').text(array[0][1]);
-    $('#guessResponse3').text(array[0][2]);
-    $('#guessResponse4').text(array[0][3]);
+    $('#guessResponse1').text(array[0]);
+    $('#guessResponse2').text(array[1]);
+    $('#guessResponse3').text(array[2]);
+    $('#guessResponse4').text(array[3]);
+    resultsArray = [];
 }
 
 // function roundCheck() {
