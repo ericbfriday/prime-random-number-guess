@@ -2,6 +2,9 @@ $(document).ready(onReady);
 
 var maxNumber = 0;
 var cpuNum = 0;
+var resultsArray = [];
+var guessCount = 0;
+var playerArray = [];
 
 function onReady() {
     console.log('jQuery sourced!');
@@ -63,9 +66,7 @@ function getRandom() {
 //     }
 // };
 
-var guessCount = 0;
 
-var playerArray = [];
 
 function makeArray() {
     var player1 = parseInt($('#guess1').val());
@@ -75,6 +76,7 @@ function makeArray() {
     playerArray.push(player1, player2, player3, player4);
     var arrayToSend = {items: playerArray};
     console.log(playerArray);
+    resultsArray = [];
     $.ajax({
         type: 'POST',
         url: '/',
@@ -88,10 +90,21 @@ function makeArray() {
         url: '/results',
         success: function(serverResp) {
             console.log('HERE IS OUR ARRAY', serverResp);
+            resultsArray.push(serverResp);
         }
     });
-
 };
+
+function arrayUnwinder(array) {
+    // for (var i = 0; i < array.length; i++) {
+    //     $('#guessResponse1').append(array[i]);
+    //     console.log($('#guessResponse' + (i + 1)));
+    $('#guessResponse1').text(array[0][0]);
+    console.log(array[0]);
+    $('#guessResponse2').text(array[0][1]);
+    $('#guessResponse3').text(array[0][2]);
+    $('#guessResponse4').text(array[0][3]);
+}
 
 // function roundCheck() {
 //     var player1 = $('#guess1').val();
