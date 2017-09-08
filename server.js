@@ -24,6 +24,25 @@ app.post('/random', function(req, res) {
     res.sendStatus(200);
 });
 
+app.post('/', function(req, res) {
+    var item = req.body.items;
+    console.log('In the BAse');
+    console.log(item);
+    res.sendStatus(200);
+});
+
+function checkGuess(playerGuess, cpuGuess) {
+    if (playerGuess > cpuGuess) {
+        console.log('Too high!');
+    } else if (playerGuess < cpuGuess) {
+        console.log('Too low!');
+    } else if (playerGuess == cpuGuess) {
+        console.log('YOU WIN!!');
+    } else {
+        console.log('You broke the game >:C');
+    }
+};
+
 app.listen(port, function() {
     console.log('listening on port 5000');
 });

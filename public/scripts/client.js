@@ -7,7 +7,7 @@ function onReady() {
     console.log('jQuery sourced!');
     $('#gameMode').hide();
     $('#submitSetup').on('click', submitSetup);
-    $('#submitGuesses').on('click', roundCheck);
+    $('#submitGuesses').on('click', makeArray);
     $('#abandonGame').on('click', abandonGame);
 };
 
@@ -51,36 +51,56 @@ function getRandom() {
 
 //var cpuNum = generator(maxNumber);
 
-function checkGuess(playerGuess, cpuGuess) {
-    if (playerGuess > cpuGuess) {
-        console.log('Too high!');
-    } else if (playerGuess < cpuGuess) {
-        console.log('Too low!');
-    } else if (playerGuess == cpuGuess) {
-        console.log('YOU WIN!!');
-    } else {
-        console.log('You broke the game >:C');
-    }
-};
+// function checkGuess(playerGuess, cpuGuess) {
+//     if (playerGuess > cpuGuess) {
+//         console.log('Too high!');
+//     } else if (playerGuess < cpuGuess) {
+//         console.log('Too low!');
+//     } else if (playerGuess == cpuGuess) {
+//         console.log('YOU WIN!!');
+//     } else {
+//         console.log('You broke the game >:C');
+//     }
+// };
 
 var guessCount = 0;
 
-function roundCheck() {
-    var player1 = $('#guess1').val();
-    var player2 = $('#guess2').val();
-    var player3 = $('#guess3').val();
-    var player4 = $('#guess4').val();
-    checkGuess(player1, cpuNum);
-    checkGuess(player2, cpuNum);
-    checkGuess(player3, cpuNum);
-    checkGuess(player4, cpuNum);
-    guessCount += 1;
-    $('#guessCount').text(guessCount);
-    $('#guess1').val('');
-    $('#guess2').val('');
-    $('#guess3').val('');
-    $('#guess4').val('');
+var playerArray = [];
+
+function makeArray() {
+    var player1 = parseInt($('#guess1').val());
+    var player2 = parseInt($('#guess2').val());
+    var player3 = parseInt($('#guess3').val());
+    var player4 = parseInt($('#guess4').val());
+    playerArray.push(player1, player2, player3, player4);
+    var arrayToSend = {items: playerArray};
+    console.log(playerArray);
+    $.ajax({
+        type: 'POST',
+        url: '/',
+        data: arrayToSend,
+        success: function(serverResp) {
+            console.log('PLAYER ARRAY SUCCESS!', serverResp);
+        }
+    });
 };
+
+// function roundCheck() {
+//     var player1 = $('#guess1').val();
+//     var player2 = $('#guess2').val();
+//     var player3 = $('#guess3').val();
+//     var player4 = $('#guess4').val();
+//     checkGuess(player1, cpuNum);
+//     checkGuess(player2, cpuNum);
+//     checkGuess(player3, cpuNum);
+//     checkGuess(player4, cpuNum);
+//     guessCount += 1;
+//     $('#guessCount').text(guessCount);
+//     $('#guess1').val('');
+//     $('#guess2').val('');
+//     $('#guess3').val('');
+//     $('#guess4').val('');
+// };
 
 function abandonGame() {
     $('#guess1').val('');
