@@ -21,7 +21,7 @@ app.get('/', function(req, res) {
 app.post('/random', function(req, res) {
     console.log('In the /random route');
     console.log(parseInt(req.body.max));
-    var randomNumber = numberGenerator(parseInt(req.body.max));
+    randomNumber = numberGenerator(parseInt(req.body.max));
     console.log(randomNumber);
     res.sendStatus(200);
 });
@@ -32,6 +32,11 @@ app.post('/', function(req, res) {
     console.log(items);
     res.sendStatus(200);
     loopArray();
+});
+
+app.get('/results', function(req, res) {
+    console.log('In the /results route')
+    res.send(guessesToSend);
 });
 
 function loopArray() {

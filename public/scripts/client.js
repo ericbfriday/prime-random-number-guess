@@ -82,7 +82,15 @@ function makeArray() {
         success: function(serverResp) {
             console.log('PLAYER ARRAY SUCCESS!', serverResp);
         }
+    });   
+        $.ajax({
+        type: 'GET',
+        url: '/results',
+        success: function(serverResp) {
+            console.log('HERE IS OUR ARRAY', serverResp);
+        }
     });
+
 };
 
 // function roundCheck() {
