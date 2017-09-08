@@ -17,12 +17,15 @@ function submitSetup() {
     //console.log('You clicked me!');
     if ($('input[name=level]:checked').val() === "easy") {
         console.log('you clicked easy!');
+        $('#maxNumber').html('<p>Easy Mode: Max number 10</p>');
         maxNumber = 10;
     } else if ($('input[name=level]:checked').val() === "medium") {
         console.log("you clicked medium!");
+        $('#maxNumber').html('<p>Medium Mode: Max number 50</p>');
         maxNumber = 50;
     } else if ($('input[name=level]:checked').val() === "hard") {
         console.log("you clicked hard!");
+        $('#maxNumber').html('<p>Hard Mode: Max number 100</p>');
         maxNumber = 100;
     } else {
         console.log("wtf!?");
@@ -41,13 +44,13 @@ function generator(anyNumber) {
 
 function checkGuess(playerGuess, cpuGuess) {
     if (playerGuess > cpuGuess) {
-        console.log('Too high!')
+        console.log('Too high!');
     } else if (playerGuess < cpuGuess) {
-        console.log('Too low!')
+        console.log('Too low!');
     } else if (playerGuess == cpuGuess) {
-        console.log('YOU WIN!!')
+        console.log('YOU WIN!!');
     } else {
-        console.log('You broke the game >:C')
+        console.log('You broke the game >:C');
     }
 }
 
@@ -72,6 +75,7 @@ function abandonGame() {
     $('#guess3').val('');
     $('#guess4').val('');
     $('#guessCount').text(0);
+    $('#maxNumber').text(0);
     $('#gameMode').hide();
     $('#setupMode').show();
 }
