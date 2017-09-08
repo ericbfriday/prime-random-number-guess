@@ -5,11 +5,15 @@ var cpuNum = 0;
 
 function onReady() {
     console.log('jQuery sourced!');
+    $('#gameMode').hide();
     $('#submitSetup').on('click', submitSetup);
     $('#submitGuesses').on('click', roundCheck);
+    $('#abandonGame').on('click', abandonGame);
 };
 
 function submitSetup() {
+    $('#setupMode').hide();
+    $('#gameMode').show();
     //console.log('You clicked me!');
     if ($('input[name=level]:checked').val() === "easy") {
         console.log('you clicked easy!');
@@ -47,6 +51,8 @@ function checkGuess(playerGuess, cpuGuess) {
     }
 }
 
+var guessCount = 0;
+
 function roundCheck() {
     var player1 = $('#guess1').val();
     var player2 = $('#guess2').val();
@@ -56,4 +62,16 @@ function roundCheck() {
     checkGuess(player2, cpuNum);
     checkGuess(player3, cpuNum);
     checkGuess(player4, cpuNum);
+    guessCount += 1;
+    $('#guessCount').text(guessCount);
 };
+
+function abandonGame() {
+    $('#guess1').val('');
+    $('#guess2').val('');
+    $('#guess3').val('');
+    $('#guess4').val('');
+    $('#guessCount').text(0);
+    $('#gameMode').hide();
+    $('#setupMode').show();
+}
